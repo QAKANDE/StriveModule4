@@ -1,5 +1,8 @@
 import React from 'react'
-import {Container,Row,Col,Card,DropdownButton,Dropdown,InputGroup,FormControl} from 'react-bootstrap'
+import {Container,Row,Col,Card,DropdownButton,Dropdown,InputGroup,FormControl,Button} from 'react-bootstrap'
+// import Comment from './Comment'
+import CommentList from './CommentList'
+import AddComment from './AddComment'
 let bookCategory = ['history' , 'horror' , 'romance' , 'scifi' , 'fantasy' ]
 let books = {
 fantasy:require('../Data/fantasy.json'),
@@ -11,7 +14,8 @@ scifi :require( '../Data/scifi.json')
 class Home extends React.Component{
     state = {
         categorySelected : "fantasy",
-        books: books.fantasy.slice(0, 12)
+        books: books.fantasy.slice(0, 12),
+        selectedBook : null 
     }
 
      handleDropDown= (category) => {
@@ -20,6 +24,13 @@ class Home extends React.Component{
             books:books[category].slice(0,12)
         })
     }
+    selectBook = (bookSelected) => {
+      console.log(bookSelected)
+      this.setState({
+        selectedBook : bookSelected
+      })
+    }
+
     handleFilter = (search) => {
         let category = this.state.categorySelected;
         if(search){
@@ -55,7 +66,7 @@ class Home extends React.Component{
   </InputGroup>
         <Row>
         {this.state.books.map((book)=>{
-                  return (
+            return (
         <Col xs={4} key={book.asin}>
         <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={book.img} />
@@ -64,11 +75,19 @@ class Home extends React.Component{
         <Card.Text>
         ${book.price}
         </Card.Text>
+        <Button onClick = {() => this.selectBook(book)}>Add Comments</Button>
         </Card.Body>
         </Card>
         </Col>
         )
         })}
+          </Row>
+          <Row>
+            <Col>
+            {/* <Comment selectedBook={this.state.selectedBook}/> */}
+            <CommentList/>
+            <AddComment/>
+            </Col>
           </Row>
       </Container>
         </>
