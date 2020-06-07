@@ -8,17 +8,17 @@ class CommentList extends React.Component{
 
     componentDidMount = async () => {
         try{
-        let response = await fetch("https://striveschool.herokuapp.com/api/comments/{asin}",{
+        let response = await fetch("https://striveschool.herokuapp.com/api/comments/",{
         method:"GET",
-        body: JSON.stringify(this.props.selectedBook.comments),
         Headers:({
             'Content-Type' : 'Application/json',
             'Authorization':'Basic dXNlcjIzOjJhazlFNXFxQkt2VjJ3a3k='
         })
     })
-    let Comments = await response.json()
+    let comments = await response.json()
+    console.log(comments)
     this.setState ({
-        Comments
+        Comments:comments
     })
 }catch(err){
     console.log(err)

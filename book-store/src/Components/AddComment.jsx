@@ -8,28 +8,41 @@ class AddComment extends React.Component{
      NewComments:{
          comment:'',
          rate :'',
-         elementID : this.props.id
+         bookID :''
      }
  }
 
     submitComment = async () => {
 try{
     let response = await fetch("https://striveschool.herokuapp.com/api/comments/",{
-        method:"GET",
-        body: JSON.stringify(this.state.comments),
+        method:"POST",
+        body: JSON.stringify(this.state.NewComments),
         Headers:({
             'Content-Type' : 'Application/json',
             'Authorization':'Basic dXNlcjIzOjJhazlFNXFxQkt2VjJ3a3k='
         })
     })
-    let Comments = await response.json()
+    if(response.ok){
+      alert('sucess')
+    }
+    else{
+      alert('something wrong')
+    }
 }catch(err){
     console.log(err)
 }
     }
 
-    updateComment = () => {
-
+    updateComment = (event) => {
+    let NewComments = this.state.NewComments
+    let id  = event.currentTarget.id;
+   if(id === 'rate' || id === 'bookID'){
+     NewComments[id] = parseInt(event.currentTarget.value)
+   }
+   else {
+     NewComments[id] = event.currentTarget.value
+   }
+   this.setState({NewComments})
     }
     render(){
         return<>
