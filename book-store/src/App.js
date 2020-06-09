@@ -1,21 +1,20 @@
 import React from "react";
 import './App.css';
+import {BrowserRouter as Router , Route} from 'react-router-dom'
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
-import BookJumbotron from "./Components/BookJumbotron";
+
 import Home from "./Components/Home";
+import Details from "./Components/Details"
 
 function App() {
   return (
-    <div className="page-container">
-      <div className="content-wrap">
-    <NavBar/>
-    <BookJumbotron/>
-    <Home/>
-      </div>
-      <Footer/>
 
-    </div>
+      <Router>
+      <NavBar/>
+      <Route path= '/' exact component={Home}/>
+      <Route path='/details/:id' component={Details}/>
+      </Router>
   );
 }
 

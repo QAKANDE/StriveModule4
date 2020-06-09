@@ -1,8 +1,8 @@
 import React from 'react'
-import {Container,Row,Col,Card,DropdownButton,Dropdown,InputGroup,FormControl,Button} from 'react-bootstrap'
-// import Comment from './Comment'
-import CommentList from './CommentList'
-import AddComment from './AddComment'
+import {Container,Row,Col,Card,DropdownButton,
+  Dropdown,InputGroup,FormControl,Button} from 'react-bootstrap'
+  import BookJumbotron from './BookJumbotron'
+  import {Link} from 'react-router-dom'
 let bookCategory = ['history' , 'horror' , 'romance' , 'scifi' , 'fantasy' ]
 let books = {
 fantasy:require('../Data/fantasy.json'),
@@ -15,7 +15,6 @@ class Home extends React.Component{
     state = {
         categorySelected : "fantasy",
         books: books.fantasy.slice(0, 12),
-        selectedBook : null 
     }
 
      handleDropDown= (category) => {
@@ -46,6 +45,7 @@ class Home extends React.Component{
     
     render(){
         return<>
+         <BookJumbotron/>
       <Container>
       <InputGroup className="mb-3">
     <DropdownButton
@@ -69,25 +69,19 @@ class Home extends React.Component{
             return (
         <Col xs={4} key={book.asin}>
         <Card style={{ width: '18rem' }}>
+        <Link to={'/details/' + book.asin }>
         <Card.Img variant="top" src={book.img} />
+        </Link>
         <Card.Body>
         <Card.Title>{book.title}</Card.Title>
         <Card.Text>
         ${book.price}
         </Card.Text>
-        <Button onClick = {() => this.selectBook(book)}>Add Comments</Button>
         </Card.Body>
         </Card>
         </Col>
         )
         })}
-          </Row>
-          <Row>
-            <Col>
-            {/* <Comment selectedBook={this.state.selectedBook}/> */}
-            <CommentList/>
-            <AddComment/>
-            </Col>
           </Row>
       </Container>
         </>
