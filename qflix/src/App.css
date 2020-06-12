@@ -1,20 +1,26 @@
-body,
-nav {
+body{
   margin: 0;
-  background-color: #221f1f;
+  background-color: #221f1f !important;
+}
+.navbar{
+  background-color: #221f1f ;
 }
 
 h2,
-h4 {
+h4,h3{
   color: #f5f5f1;
 }
-
+/* 
 .dropdown-menu.bg-dark .dropdown-item {
   color: white !important;
 }
 
 .dropdown-menu.bg-dark .dropdown-item:hover {
   color: black !important;
+} */
+.btn-primary{
+  background-color: black !important;
+  border-color:white !important;
 }
 
 .icons {

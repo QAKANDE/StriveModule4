@@ -1,0 +1,10 @@
+.card{
+    background-color: rgb(19,18,18) !important;
+}
+.card .card-body a p{
+    color: white;
+}
+.card .card-body a:hover{
+    text-decoration: none;
+    font-weight: bold;
+}
