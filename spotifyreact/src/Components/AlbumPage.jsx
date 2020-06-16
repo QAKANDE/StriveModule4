@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Row,Col,Container,Card} from 'react-bootstrap'
+import {Row,Col,Container,Card, Jumbotron} from 'react-bootstrap'
+import './AlbumPage.css'
+import './AlbumPageJumbotron'
 import {Link} from 'react-router-dom'
 class AlbumPage extends Component {
     state = { 
@@ -22,24 +24,25 @@ class AlbumPage extends Component {
        })
     }
     render() { 
-        console.log(this.props)
         return (
             <Container>
+            {this.state.artistAlbum.slice(0,12).map((album,index)=>
+                <Jumbotron artistImage={album.artist.picture} artistName={album.artist.name}/>
               <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-6 mt-4 mx-2 text-center">
-                    {this.state.artistAlbum.slice(0,12).map((album,index)=>
                   <Col className="card">
                   <Card.Img variant="top" src={album.album.cover} />
                   <Card.Body>
-                      <Link to={'/songlist/' + album.album.id}className='card-title'>
+                      <Link to={'/songlist/' + album.album.id} className='card-title'>
                {album.album.title}
                       </Link>
                   </Card.Body>
                 </Col>
-                    )}
                 </Row>
+                    )}
+                    </Container>
 
-            </Container>
-        )
+          
+        );
          
            
         

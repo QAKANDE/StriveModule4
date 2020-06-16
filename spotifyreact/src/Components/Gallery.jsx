@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Row} from 'react-bootstrap'
 import Songs from './Songs'
+import './Gallery.css'
 import {Container} from 'react-bootstrap'
 class Gallery extends Component {
     state = { 
@@ -49,7 +50,7 @@ class Gallery extends Component {
                     <Songs key={index} image={song.album.cover_xl} title={song.title} artist={song.artist.name}/>
                 )}
             </Row>
-            <h4>Metallica</h4>
+            <h4>Queen</h4>
             <Row className="row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-6 mt-4 mx-2 text-center">
                 {this.state.queen.slice(0,6).map((song,index) => 
                     <Songs key={index} image={song.album.cover_xl} title={song.title} artist={song.artist.name} name={song.artist.name}/>

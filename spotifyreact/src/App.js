@@ -10,17 +10,15 @@ import MainContent from './Components/MainContent';
 function App() {
   return (
     <div className="App">
-      <Row>
-        <Col className="sidebar-col col-2">
+  <div id="sidebar">
         <Sidebar/>
-        </Col>
-        <Col className="main-col col-10">
+  </div>
+  <div id="main-content">
       <MainContent/>
-        </Col>
-      </Row>
-      <div className="footer">
+  </div>  
+      {/* <div className="footer">
       <Footer/>
-      </div>
+      </div> */}
     </div>
   );
 }

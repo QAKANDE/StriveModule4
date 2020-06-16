@@ -1,7 +1,7 @@
 .card{
-    background-color: rgb(19,18,18) !important;
+    background-color:rgb(53, 52, 52)!important;
 }
-.card .card-body a p{
+.card .card-body .card-text{
     color: white;
 }
 .card .card-body a:hover{
