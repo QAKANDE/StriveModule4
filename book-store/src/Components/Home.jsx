@@ -3,52 +3,62 @@ import {Container,Row,Col,Card,DropdownButton,
   Dropdown,InputGroup,FormControl,Button} from 'react-bootstrap'
   import BookJumbotron from './BookJumbotron'
   import {Link} from 'react-router-dom'
-let bookCategory = ['history' , 'horror' , 'romance' , 'scifi' , 'fantasy' ]
-let books = {
-fantasy:require('../Data/fantasy.json'),
-history :require( '../Data/history.json'),
-horror :require( '../Data/horror.json'),
-romance :require( '../Data/romance.json'),
-scifi :require( '../Data/scifi.json')
-}
+  import {getBooks} from '../fetches/index'
+
+// let bookCategory = ['history' , 'horror' , 'romance' , 'scifi' , 'fantasy' ]
+// let books = {
+// fantasy:require('../Data/fantasy.json'),
+// history :require( '../Data/history.json'),
+// horror :require( '../Data/horror.json'),
+// romance :require( '../Data/romance.json'),
+// scifi :require( '../Data/scifi.json')
+// }
 class Home extends React.Component{
     state = {
         categorySelected : "fantasy",
-        books: books.fantasy.slice(0, 12),
+        books: [],
     }
 
-     handleDropDown= (category) => {
-        this.setState({
-            categorySelected: category,
-            books:books[category].slice(0,12)
-        })
-    }
-    selectBook = (bookSelected) => {
-      console.log(bookSelected)
-      this.setState({
-        selectedBook : bookSelected
-      })
+    componentDidMount = async () => {
+     let books = await getBooks()
+     this.setState({
+       books:books.data.data
+     })
+     console.log(books.data.data[0])
     }
 
-    handleFilter = (search) => {
-        let category = this.state.categorySelected;
-        if(search){
-            let filteredBooks = books[category].filter((book) =>
-            book.title.toLowerCase().includes(search.toLowerCase())
-          );
-          this.setState({ books: filteredBooks.slice(0, 12) });
-        }
-        else{
-            this.setState({ books: books[category].slice(0, 12) });
-        }
-        }
+    //  handleDropDown= (category) => {
+    //     this.setState({
+    //         categorySelected: category,
+    //         books:books[category].slice(0,12)
+    //     })
+    // }
+    // selectBook = (bookSelected) => {
+    //   console.log(bookSelected)
+    //   this.setState({
+    //     selectedBook : bookSelected
+    //   })
+    // }
+
+    // handleFilter = (search) => {
+    //     let category = this.state.categorySelected;
+    //     if(search){
+    //         let filteredBooks = books[category].filter((book) =>
+    //         book.title.toLowerCase().includes(search.toLowerCase())
+    //       );
+    //       this.setState({ books: filteredBooks.slice(0, 12) });
+    //     }
+    //     else{
+    //         this.setState({ books: books[category].slice(0, 12) });
+    //     }
+    //     }
     
     render(){
         return<>
          <BookJumbotron/>
       <Container>
       <InputGroup className="mb-3">
-    <DropdownButton
+    {/* <DropdownButton
       as={InputGroup.Prepend}
       variant="outline-secondary"
       title={this.state.categorySelected}
@@ -61,11 +71,11 @@ class Home extends React.Component{
                 </Dropdown.Item>
               )
           })}
-    </DropdownButton>
+    </DropdownButton> */}
     <FormControl aria-describedby="basic-addon1" placeholder="Search by title" onChange={(e)=>this.handleFilter(e.target.value)}/>
   </InputGroup>
         <Row>
-        {this.state.books.map((book)=>{
+        {this.state.books.slice(0,12).map((book)=>{
             return (
         <Col xs={4} key={book.asin}>
         <Card style={{ width: '18rem' }}>

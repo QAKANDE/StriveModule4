@@ -6,12 +6,11 @@ import {BrowserRouter as Router,Route} from 'react-router-dom'
 
 function App() {
   return (
-    <Router>
+    
     <div className="App">
-    <Route path='/album/' component={Albums} ></Route>
-    <Route path='/details/:id' component={Details} ></Route>
+   <Albums/>
     </div>
-    </Router>
+
   );
 }
 
